@@ -1,0 +1,25 @@
+{
+  "name": "forkify-app",
+  "version": "1.0.0",
+  "description": "Building a modern application using some third party libraries.",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarthikDevadiga/Forkify-App.git"
+  },
+  "author": "Karthik K Devadiga",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KarthikDevadiga/Forkify-App/issues"
+  },
+  "homepage": "https://github.com/KarthikDevadiga/Forkify-App#readme",
+  "devDependencies": {
+    "@parcel/transformer-image": "^2.0.0-rc.0",
+    "@parcel/transformer-sass": "^2.0.0-rc.0",
+    "parcel": "^2.0.0-rc.0"
+  }
+}
