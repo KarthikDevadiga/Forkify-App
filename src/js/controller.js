@@ -1,9 +1,11 @@
-import icons from "url:../img/icons.svg"; // importing svg file bcs dist can find the icon location
+import icons from "url:../img/icons.svg";
+import favicon from "url:../img/favicon.png"; // importing svg file bcs dist can find the icon location
 
 const { id } = require("prelude-ls");
 const { async } = require("regenerator-runtime");
 
 const recipeContainer = document.querySelector(".recipe");
+const results = document.querySelector(".results"); //list container <ul></ul>
 
 const timeout = function (s) {
   return new Promise(function (_, reject) {
@@ -32,8 +34,11 @@ const renderSpinner = function (parentContainer) {
 const getrecipe = async function () {
   renderSpinner(recipeContainer);
   try {
+    const hash = window.location.hash.slice(1); //getting hash
+    renderSpinner(recipeContainer);
+
     const response = await fetch(
-      "https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886",
+      `https://forkify-api.herokuapp.com/api/v2/recipes/${hash}`,
       {
         mode: "cors",
       }
@@ -153,4 +158,36 @@ const getrecipe = async function () {
   }
 };
 
-getrecipe();
+//
+const renderList = function () {
+  const html = `
+<li class="preview">
+<a class="preview__link preview__link--active" href="#5ed6604591c37cdc054bc886">
+<figure class="preview__fig">
+<img src="${favicon}" alt="Test" />
+</figure>
+  <div class="preview__data">
+    <h4 class="preview__title">Pasta with Tomato Cream ...</h4>
+      <p class="preview__publisher">The Pioneer Woman</p>
+        <div class="preview__user-generated">
+          <svg>
+              <use href="${icons}#icon-user"></use>
+          </svg>
+        </div>
+      </div>
+    </a>
+   </li>
+  `;
+  results.innerHTML = "";
+  results.insertAdjacentHTML("afterbegin", html);
+};
+
+renderList();
+
+results.addEventListener("click", function (e) {
+  console.log(e);
+});
+//prettier-ignore
+["load", "hashchange"].forEach(function (event) {
+  window.addEventListener(event, getrecipe);
+});
