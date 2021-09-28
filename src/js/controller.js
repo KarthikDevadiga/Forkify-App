@@ -32,9 +32,10 @@ const renderSpinner = function (parentContainer) {
 };
 
 const getrecipe = async function () {
-  renderSpinner(recipeContainer);
   try {
     const hash = window.location.hash.slice(1); //getting hash
+
+    if (!hash) return;
     renderSpinner(recipeContainer);
 
     const response = await fetch(

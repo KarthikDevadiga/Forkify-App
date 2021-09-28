@@ -480,9 +480,9 @@ const renderSpinner = function(parentContainer) {
     parentContainer.insertAdjacentHTML("afterbegin", html);
 };
 const getrecipe = async function() {
-    renderSpinner(recipeContainer);
     try {
         const hash = window.location.hash.slice(1); //getting hash
+        if (!hash) return;
         renderSpinner(recipeContainer);
         const response = await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${hash}`, {
             mode: "cors"
