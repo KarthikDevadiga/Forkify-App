@@ -186,7 +186,7 @@ const renderList = function () {
 renderList();
 
 results.addEventListener("click", function (e) {
-  console.log(e);
+  if (e.target.closest(".preview__link")) console.log(e.target);
 });
 //prettier-ignore
 ["load", "hashchange"].forEach(function (event) {
