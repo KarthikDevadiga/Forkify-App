@@ -27,7 +27,7 @@ const timeout = function (s) {
 
 const getrecipe = async function () {
   try {
-    const hash = window.location.hash.slice(1); //getting hash
+    const hash = window.location.hash.slice(1);                           //getting hash
     if (!hash) return;
     view.renderSpinner();
     //loading from module.js
