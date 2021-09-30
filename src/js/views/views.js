@@ -129,7 +129,7 @@ class RecipeView {
     this.#parentContainer.insertAdjacentHTML("afterbegin", html);
   }
 
-  eventPublisher(handler) {
+  eventPublisher(handler){
     ["load", "hashchange"].forEach(function (event) {
       window.addEventListener(event, handler);
     });
