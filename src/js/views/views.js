@@ -5,6 +5,8 @@ console.log(Fraction);
 class RecipeView {
   #parentContainer = document.querySelector(".recipe");
   #data;
+  #errorMessage = "no recipes for current search result";
+  #message = "task completed";
 
   render(data) {
     this.#data = data;
@@ -129,10 +131,40 @@ class RecipeView {
     this.#parentContainer.insertAdjacentHTML("afterbegin", html);
   }
 
-  eventPublisher(handler){
+  eventPublisher(handler) {
     ["load", "hashchange"].forEach(function (event) {
       window.addEventListener(event, handler);
     });
+  }
+
+  renderError(message = this.#errorMessage) {
+    const html = `
+    <div class="error">
+        <div>
+            <svg>
+                <use href="${icons}#icon-alert-triangle"></use>
+            </svg>
+        </div>
+        <p>${message}</p>
+    </div>
+    `;
+    this.#clear();
+    this.#parentContainer.insertAdjacentHTML("afterbegin", html);
+  }
+
+  renderSuccess(message = this.#message) {
+    const html = `
+    <div class="message">
+        <div>
+            <svg>
+                <use href="${icons}#icon-smile"></use>
+            </svg>
+        </div>
+        <p>${message}</p>
+    </div>
+    `;
+    this.#clear();
+    this.#parentContainer.insertAdjacentHTML("afterbegin", html);
   }
 }
 

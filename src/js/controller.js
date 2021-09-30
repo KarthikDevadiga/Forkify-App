@@ -1,3 +1,5 @@
+//importing SearchView
+import searchView from "./views/searchView.js";
 //importing state(object) & loadrecipe(method) from model.js
 import * as module from "./model.js";
 //importing RecipeView class from view.js and creating a object render
@@ -25,7 +27,20 @@ const getrecipe = async function () {
     //render into recipe container
     view.render(recipe);
   } catch (err) {
-    alert(err);
+    view.renderError();
+  }
+};
+
+//search bar
+const renderSearch = async function () {
+  try {
+    const query = searchView.getQuery();
+    if (!query) return;
+    await module.loadSearchResults(query);
+
+    console.log(module.state.search.result);
+  } catch (err) {
+    view.renderError(err.message);
   }
 };
 
@@ -64,3 +79,8 @@ const init = function () {
   view.eventPublisher(getrecipe);
 };
 init();
+//listener for search btn
+const searchBtn = function () {
+  searchView.searchEvent(renderSearch);
+};
+searchBtn();
