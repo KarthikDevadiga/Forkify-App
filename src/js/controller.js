@@ -59,6 +59,8 @@ results.addEventListener("click", function (e) {
   if (e.target.closest(".preview__link")) console.log(e.target);
 });
 //prettier-ignore
-["load", "hashchange"].forEach(function (event) {
-  window.addEventListener(event, getrecipe);
-});
+
+const init = function () {
+  view.eventPublisher(getrecipe);
+};
+init();
