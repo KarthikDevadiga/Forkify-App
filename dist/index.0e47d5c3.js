@@ -454,7 +454,11 @@ function hmrAcceptRun(bundle, id) {
     acceptedAssets[id] = true;
 }
 
+<<<<<<< HEAD
+},{}]},["Z1ywL"], null, "parcelRequire94c2")
+=======
 },{}]},["Z1ywL"], null, "parcelRequire6d3a")
+>>>>>>> 21062a2fecb93ccd3d58efad395fc7c7f37c346c
 const recipeContainer = document.querySelector('.recipe');
 const timeout = function(s) {
     return new Promise(function(_, reject) {

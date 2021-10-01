@@ -1,3 +1,6 @@
+import resultView from "./views/resultView.js";
+//importing SearchView
+import searchView from "./views/searchView.js";
 //importing state(object) & loadrecipe(method) from model.js
 import * as module from "./model.js";
 //importing RecipeView class from view.js and creating a object render
@@ -10,24 +13,13 @@ const { id } = require("prelude-ls");
 const { async } = require("regenerator-runtime");
 
 const recipeContainer = document.querySelector(".recipe");
-const results = document.querySelector(".results"); //list container <ul></ul>
-
-const timeout = function (s) {
-  return new Promise(function (_, reject) {
-    setTimeout(function () {
-      reject(new Error(`Request took too long! Timeout after ${s} second`));
-    }, s * 1000);
-  });
-};
+//list container <ul></ul>
 
 // https://forkify-api.herokuapp.com/v2
 
-///////////////////////////////////////
-//spinner
-
 const getrecipe = async function () {
   try {
-    const hash = window.location.hash.slice(1);                           //getting hash
+    const hash = window.location.hash.slice(1); //getting hash
     if (!hash) return;
     view.renderSpinner();
     //loading from module.js
@@ -36,40 +28,35 @@ const getrecipe = async function () {
     //render into recipe container
     view.render(recipe);
   } catch (err) {
-    alert(err.message);
+    view.renderError();
+  }
+};
+
+//search bar
+const renderSearch = async function () {
+  try {
+    resultView.renderSpinner();
+    const query = searchView.getQuery();
+    if (!query) return;
+    await module.loadSearchResults(query);
+
+    resultView.render(module.state.search.result);
+  } catch (err) {
+    view.renderError(err.message);
   }
 };
 
 //my lines :)
-const renderList = function () {
-  const html = `
-<li class="preview">
-<a class="preview__link preview__link--active" href="#5ed6604591c37cdc054bc886">
-<figure class="preview__fig">
-<img src="${favicon}" alt="Test" />
-</figure>
-  <div class="preview__data">
-    <h4 class="preview__title">Pasta with Tomato Cream ...</h4>
-      <p class="preview__publisher">The Pioneer Woman</p>
-        <div class="preview__user-generated">
-          <svg>
-              <use href="${icons}#icon-user"></use>
-          </svg>
-        </div>
-      </div>
-    </a>
-   </li>
-  `;
-  results.innerHTML = "";
-  results.insertAdjacentHTML("afterbegin", html);
-};
-renderList();
 //till here :)
 
-results.addEventListener("click", function (e) {
-  if (e.target.closest(".preview__link")) console.log(e.target);
-});
 //prettier-ignore
-["load", "hashchange"].forEach(function (event) {
-  window.addEventListener(event, getrecipe);
-});
+
+const init = function () {
+  view.eventPublisher(getrecipe);
+};
+init();
+//listener for search btn
+const searchBtn = function () {
+  searchView.searchEvent(renderSearch);
+};
+searchBtn();
