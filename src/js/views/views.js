@@ -1,34 +1,21 @@
+import { ParentView } from "./ParentView";
 import icons from "url:../../img/icons.svg";
 //importing fraction from fraction api since it is not a default export we are using Fraction
 import { Fraction } from "fractional";
 console.log(Fraction);
-class RecipeView {
-  #parentContainer = document.querySelector(".recipe");
-  #data;
-  #errorMessage = "no recipes for current search result";
-  #message = "task completed";
-
-  render(data) {
-    this.#data = data;
-    this.#clear();
-    this.#parentContainer.insertAdjacentHTML(
-      "afterbegin",
-      this._generateMarkup()
-    );
-  }
-
-  #clear() {
-    this.#parentContainer.innerHTML = "";
-  }
+class RecipeView extends ParentView {
+  _parentContainer = document.querySelector(".recipe");
+  _errorMessage = "no recipes for current search result";
+  _message = "task completed";
 
   _generateMarkup() {
     return `
     <figure class="recipe__fig">
-          <img src="${this.#data.image}" crossorigin = "Anonymous" alt="${
-      this.#data.title
+          <img src="${this._data.image}" crossorigin = "Anonymous" alt="${
+      this._data.title
     }" class="recipe__img" />
           <h1 class="recipe__title">
-            <span>${this.#data.title}</span>
+            <span>${this._data.title}</span>
           </h1>
         </figure>
 
@@ -76,7 +63,7 @@ class RecipeView {
         <div class="recipe__ingredients">
           <h2 class="heading--2">Recipe ingredients</h2>
           <ul class="recipe__ingredient-list">
-          ${this.#data.ingredients
+          ${this._data.ingredients
             .map(function (ingredient) {
               return `<li class="recipe__ingredient">
             <svg class="recipe__icon">
@@ -102,13 +89,13 @@ class RecipeView {
           <p class="recipe__directions-text">
             This recipe was carefully designed and tested by
             <span class="recipe__publisher">${
-              this.#data.publisher
+              this._data.publisher
             }</span>. Please check out
             directions at their website.
           </p>
           <a
             class="btn--small recipe__btn"
-            href="${this.#data.sourceUrl}"
+            href="${this._data.sourceUrl}"
             target="_blank"
           >
             <span>Directions</span>
@@ -119,52 +106,11 @@ class RecipeView {
         </div>
     `;
   }
-  renderSpinner() {
-    const html = `
-    <div class="spinner">
-      <svg>
-        <use href="${icons}#icon-loader"></use>
-      </svg>
-     </div> 
-    `;
-    this.#clear();
-    this.#parentContainer.insertAdjacentHTML("afterbegin", html);
-  }
 
   eventPublisher(handler) {
     ["load", "hashchange"].forEach(function (event) {
       window.addEventListener(event, handler);
     });
-  }
-
-  renderError(message = this.#errorMessage) {
-    const html = `
-    <div class="error">
-        <div>
-            <svg>
-                <use href="${icons}#icon-alert-triangle"></use>
-            </svg>
-        </div>
-        <p>${message}</p>
-    </div>
-    `;
-    this.#clear();
-    this.#parentContainer.insertAdjacentHTML("afterbegin", html);
-  }
-
-  renderSuccess(message = this.#message) {
-    const html = `
-    <div class="message">
-        <div>
-            <svg>
-                <use href="${icons}#icon-smile"></use>
-            </svg>
-        </div>
-        <p>${message}</p>
-    </div>
-    `;
-    this.#clear();
-    this.#parentContainer.insertAdjacentHTML("afterbegin", html);
   }
 }
 
