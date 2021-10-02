@@ -38,9 +38,12 @@ const renderSearch = async function () {
     resultView.renderSpinner();
     const query = searchView.getQuery();
     if (!query) return;
+    console.log("------------------------------------------------------");
     await module.loadSearchResults(query);
+    console.log("------------------------------------------------------");
 
-    resultView.render(module.state.search.result);
+    console.log(module.state.search.result);
+    resultView.render(module.getSearchResultPage(1));
   } catch (err) {
     view.renderError(err.message);
   }

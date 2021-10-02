@@ -6,11 +6,9 @@ export class ParentView {
   render(data) {
     this._data = data;
     this._clear();
-    console.log(this._generateMarkup());
-    this._parentContainer.insertAdjacentHTML(
-      "afterbegin",
-      this._generateMarkup()
-    );
+    const markup = this._generateMarkup();
+    console.log(markup);
+    this._parentContainer.insertAdjacentHTML("afterbegin", markup);
   }
 
   _clear() {

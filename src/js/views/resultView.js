@@ -15,7 +15,7 @@ class ResultView extends ParentView {
     console.log(data);
     return `
     <li class="preview">
-    <a class="preview__link preview__link--active" href="${data.id}">
+    <a class="preview__link preview__link--active" href="#${data.id}">
     <figure class="preview__fig">
     <img src="${data.image}" crossorigin = "Anonymous" alt="${data.title}" />
     </figure>
