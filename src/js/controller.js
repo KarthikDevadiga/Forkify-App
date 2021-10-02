@@ -1,3 +1,4 @@
+import pagination from "./views/paginationView";
 import resultView from "./views/resultView.js";
 //importing SearchView
 import searchView from "./views/searchView.js";
@@ -43,10 +44,16 @@ const renderSearch = async function () {
     console.log("------------------------------------------------------");
 
     console.log(module.state.search.result);
-    resultView.render(module.getSearchResultPage(1));
+    resultView.render(module.getSearchResultPage());
+    pagination.render(module.state.search);
   } catch (err) {
     view.renderError(err.message);
   }
+};
+
+const controllPagination = function (goToPage) {
+  resultView.render(module.getSearchResultPage(goToPage));
+  pagination.render(module.state.search);
 };
 
 //my lines :)
@@ -56,6 +63,7 @@ const renderSearch = async function () {
 
 const init = function () {
   view.eventPublisher(getrecipe);
+  pagination.addHendlerClick(controllPagination)
 };
 init();
 //listener for search btn
