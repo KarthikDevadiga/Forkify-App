@@ -74,3 +74,5 @@ class PaginationView extends ParentView {
 }
 
 export default new PaginationView();
+
+//
