@@ -1,11 +1,19 @@
 import 'core-js/stable';
+import { async } from 'regenerator-runtime';
 import 'regenerator-runtime/runtime';
 //importing model
 import * as model from './model';
 //importing recipeView Class
 import recipeView from './views/recipeView';
-///////////////////////////////////////////////////
+// importing searchView
+import searchView from './views/searchView';
 
+import resultView from './views/resultView';
+
+///////////////////////////////////////////////////
+if (model.hot) {
+  model.hot.accept();
+}
 const getData = async function () {
   try {
     const hashId = window.location.hash.slice(1);
@@ -20,7 +28,20 @@ const getData = async function () {
   }
 };
 
+const searchResults = async function () {
+  try {
+    const query = searchView.getQuery();
+    if (!query) return;
+    await model.loadSearch(query);
+    console.log(model.state.searchResult.recipes);
+    resultView.render(model.state.searchResult.recipes);
+  } catch (err) {
+    console.error(err);
+  }
+};
+// prettier-ignore
 // Publisher Scriber Pattern
 (function () {
   recipeView.addHandlerRender(getData);
+  searchView.addHandlearSearch(searchResults);
 })();

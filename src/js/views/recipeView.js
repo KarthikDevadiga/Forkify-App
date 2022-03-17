@@ -1,10 +1,11 @@
 import icons from 'url:../../img/icons.svg';
-
-class RecipeView {
-  #parent = document.querySelector('.recipe');
-  #recipe = {};
+import View from './view';
+class RecipeView extends View {
+  _parent = document.querySelector('.recipe');
+  // _recipe = {};
+  _message = `Did not find results for your Data`;
   // prettier-ignore
-  #generateMarkup(recipe) {
+  _generateMarkup(recipe) {
     return `
         <figure class="recipe__fig">
               <img src="${recipe.imageUrl}" alt="${
@@ -99,35 +100,9 @@ class RecipeView {
             </div>
         `;
   }
-  #clearParent(container) {
-    console.log('running');
-    container.innerHTML = '';
-  }
-
-  renderSpinner = function (container) {
-    const spinner = `
-      <div class="spinner">
-        <svg>
-          <use href="${icons}#icon-loader"></use>
-        </svg>
-      </div>
-    `;
-    container.insertAdjacentHTML('afterbegin', spinner);
-  };
-
-  render(data) {
-    this.#clearParent(this.#parent);
-    this.renderSpinner(this.#parent);
-    this.#recipe = data;
-    this.#parent.insertAdjacentHTML(
-      'afterbegin',
-      this.#generateMarkup(this.#recipe)
-    );
-  }
 
   addHandlerRender(func) {
     // window.location.load/hash;
-
     ['hashchange', 'load'].forEach((ele) => window.addEventListener(ele, func));
   }
 }

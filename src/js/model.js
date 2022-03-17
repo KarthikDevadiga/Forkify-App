@@ -2,6 +2,10 @@ import { FETCH_URL } from './config';
 import { getJSON } from './helper';
 export const state = {
   recipe: {},
+  searchResult: {
+    query: '',
+    recipes: [],
+  },
 };
 
 export const loadRecipe = async function (hashId) {
@@ -20,5 +24,23 @@ export const loadRecipe = async function (hashId) {
     };
   } catch (err) {
     console.error(err);
+  }
+};
+
+export const loadSearch = async function (query) {
+  try {
+    const data = await getJSON(`${FETCH_URL}?search=${query}`);
+    let { recipes } = data.data;
+    state.searchResult.recipes = recipes.map((ele) => {
+      return {
+        publisher: ele.publisher,
+        title: ele.title,
+        imageUrl: ele.image_url,
+        id: ele.id,
+      };
+    });
+  } catch (err) {
+    console.error(`${err} at file model.js`);
+    throw err;
   }
 };
