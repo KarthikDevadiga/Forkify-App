@@ -68,9 +68,9 @@ class RecipeView {
                 <svg class="recipe__icon">
                   <use href="${icons}#icon-check"></use>
                 </svg>
-                <div class="recipe__quantity">${ele.quantity}</div>
+                <div class="recipe__quantity">${(ele.quantity) ? ele.quantity : "" }</div>
                 <div class="recipe__description">
-                  <span class="recipe__unit">${recipe.unit}</span>
+                  <span class="recipe__unit">${(recipe.unit)? recipe.unit : ""}</span>
                   ${ele.description}
                 </div>
               </li>`;
@@ -123,6 +123,12 @@ class RecipeView {
       'afterbegin',
       this.#generateMarkup(this.#recipe)
     );
+  }
+
+  addHandlerRender(func) {
+    // window.location.load/hash;
+
+    ['hashchange', 'load'].forEach((ele) => window.addEventListener(ele, func));
   }
 }
 
