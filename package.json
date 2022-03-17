@@ -11,7 +11,9 @@
   "author": "Karthik K Devadiga",
   "license": "MIT",
   "dependencies": {
-    "parcel": "^2.3.2"
+    "core-js": "^3.21.1",
+    "parcel": "^2.3.2",
+    "regenerator-runtime": "^0.13.9"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "2.3.2"
