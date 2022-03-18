@@ -575,6 +575,13 @@ const updateRecipe = function(recipe) {
     _model.updateRecipeState(recipe);
     _recipeViewDefault.default.render(_model.state.recipe);
 };
+// for addingBook mark
+const bookMark = function() {
+    // console.log('Book Mark Activeted');
+    if (_model.state.recipe.bookMark) _model.removeBookMark();
+    else _model.initiateBookMark();
+    _recipeViewDefault.default.render(_model.state.recipe);
+};
 // prettier-ignore
 // Publisher Scriber Pattern
 (function() {
@@ -582,6 +589,7 @@ const updateRecipe = function(recipe) {
     _searchViewDefault.default.addHandlearSearch(searchResults);
     _paginationDefault.default.addHandlerPage(pageBtnClicked);
     _recipeViewDefault.default.addHandelerTinyButton(updateRecipe);
+    _recipeViewDefault.default._addHandlerBookMark(bookMark);
 })();
 
 },{"core-js/modules/web.immediate.js":"49tUX","regenerator-runtime":"dXNgZ","regenerator-runtime/runtime":"dXNgZ","./model":"Y4A21","./views/recipeView":"l60JC","./views/searchView":"9OQAM","./views/resultView":"f70O5","./views/pagination":"lOFRU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"49tUX":[function(require,module,exports) {
@@ -2238,6 +2246,10 @@ parcelHelpers.export(exports, "renderRecipePerPage", ()=>renderRecipePerPage
 );
 parcelHelpers.export(exports, "updateRecipeState", ()=>updateRecipeState
 );
+parcelHelpers.export(exports, "initiateBookMark", ()=>initiateBookMark
+);
+parcelHelpers.export(exports, "removeBookMark", ()=>removeBookMark
+);
 var _config = require("./config");
 var _helper = require("./helper");
 const state = {
@@ -2248,7 +2260,8 @@ const state = {
         query: '',
         recipes: [],
         currentPage: _config.RECIPE_PER_PAGE
-    }
+    },
+    bookMarks: []
 };
 const loadRecipe = async function(hashId) {
     try {
@@ -2264,6 +2277,9 @@ const loadRecipe = async function(hashId) {
             sourceUrl: recipe.source_url,
             title: recipe.title
         };
+        if (state.bookMarks.some((recipeId)=>recipeId == hashId
+        )) state.recipe.bookMark = true;
+        else state.recipe.bookMark = false;
     } catch (err) {
         console.error(err);
     }
@@ -2280,6 +2296,7 @@ const loadSearch = async function(query) {
                 id: ele.id
             };
         });
+        state.searchResult.page = 1;
     } catch (err) {
         console.error(`${err} at file model.js`);
         throw err;
@@ -2296,6 +2313,18 @@ const updateRecipeState = function(recipe) {
         ele.quantity = +ele.quantity * +recipe / +state.recipe.servings;
     });
     state.recipe.servings = recipe;
+};
+const initiateBookMark = function() {
+    const currentRecipe = state.recipe;
+    state.bookMarks.push(currentRecipe.id);
+    state.recipe.bookMark = true;
+    console.log(state.recipe);
+};
+const removeBookMark = function() {
+    const index = state.bookMarks.findIndex((recipeId)=>recipeId === state.recipe.id
+    );
+    state.bookMarks.splice(index, 1);
+    state.recipe.bookMark = false;
 };
 
 },{"./config":"k5Hzs","./helper":"lVRAz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"k5Hzs":[function(require,module,exports) {
@@ -2382,6 +2411,14 @@ class RecipeView extends _viewDefault.default {
     _parent = document.querySelector('.recipe');
     // _recipe = {};
     _message = `Did not find results for your Data`;
+    //adding handeler function for book mark
+    _addHandlerBookMark(func) {
+        this._parent.addEventListener('click', function(e) {
+            const bk = e.target.closest('.book-mark');
+            if (!bk) return;
+            func();
+        });
+    }
     // adding increase and decreaseing button
     addHandelerTinyButton(func) {
         this._parent.addEventListener('click', function(evt) {
@@ -2437,9 +2474,9 @@ class RecipeView extends _viewDefault.default {
                   <use href="${_iconsSvgDefault.default}#icon-user"></use>
                 </svg>
               </div>
-              <button class="btn--round">
+              <button class="btn--round book-mark">
                 <svg class="">
-                  <use href="${_iconsSvgDefault.default}#icon-bookmark-fill"></use>
+                  <use href="${_iconsSvgDefault.default}#icon-bookmark${recipe.bookMark ? `-fill` : ""}"></use>
                 </svg>
               </button>
             </div>

@@ -5,6 +5,15 @@ class RecipeView extends View {
   // _recipe = {};
   _message = `Did not find results for your Data`;
 
+  //adding handeler function for book mark
+  _addHandlerBookMark(func) {
+    this._parent.addEventListener('click', function (e) {
+      const bk = e.target.closest('.book-mark');
+      if (!bk) return;
+      func();
+    });
+  }
+
   // adding increase and decreaseing button
   addHandelerTinyButton(func) {
     this._parent.addEventListener('click', function (evt) {
@@ -66,9 +75,9 @@ class RecipeView extends View {
                   <use href="${icons}#icon-user"></use>
                 </svg>
               </div>
-              <button class="btn--round">
+              <button class="btn--round book-mark">
                 <svg class="">
-                  <use href="${icons}#icon-bookmark-fill"></use>
+                  <use href="${icons}#icon-bookmark${(recipe.bookMark)?`-fill` : ""}"></use>
                 </svg>
               </button>
             </div>

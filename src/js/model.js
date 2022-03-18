@@ -8,6 +8,7 @@ export const state = {
     recipes: [],
     currentPage: RECIPE_PER_PAGE,
   },
+  bookMarks: [],
 };
 
 export const loadRecipe = async function (hashId) {
@@ -24,6 +25,9 @@ export const loadRecipe = async function (hashId) {
       sourceUrl: recipe.source_url,
       title: recipe.title,
     };
+    if (state.bookMarks.some((recipeId) => recipeId == hashId))
+      state.recipe.bookMark = true;
+    else state.recipe.bookMark = false;
   } catch (err) {
     console.error(err);
   }
@@ -41,6 +45,7 @@ export const loadSearch = async function (query) {
         id: ele.id,
       };
     });
+    state.searchResult.page = 1;
   } catch (err) {
     console.error(`${err} at file model.js`);
     throw err;
@@ -60,4 +65,19 @@ export const updateRecipeState = function (recipe) {
     ele.quantity = (+ele.quantity * +recipe) / +state.recipe.servings;
   });
   state.recipe.servings = recipe;
+};
+
+export const initiateBookMark = function () {
+  const currentRecipe = state.recipe;
+  state.bookMarks.push(currentRecipe.id);
+  state.recipe.bookMark = true;
+  console.log(state.recipe);
+};
+
+export const removeBookMark = function () {
+  const index = state.bookMarks.findIndex(
+    (recipeId) => recipeId === state.recipe.id
+  );
+  state.bookMarks.splice(index, 1);
+  state.recipe.bookMark = false;
 };

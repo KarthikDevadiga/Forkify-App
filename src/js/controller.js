@@ -54,6 +54,17 @@ const updateRecipe = function (recipe) {
   model.updateRecipeState(recipe);
   recipeView.render(model.state.recipe);
 };
+
+// for addingBook mark
+const bookMark = function () {
+  // console.log('Book Mark Activeted');
+  if (model.state.recipe.bookMark) {
+    model.removeBookMark();
+  } else {
+    model.initiateBookMark();
+  }
+  recipeView.render(model.state.recipe);
+};
 // prettier-ignore
 // Publisher Scriber Pattern
 
@@ -62,4 +73,5 @@ const updateRecipe = function (recipe) {
   searchView.addHandlearSearch(searchResults);
   pagination.addHandlerPage(pageBtnClicked);
   recipeView.addHandelerTinyButton(updateRecipe);
+  recipeView._addHandlerBookMark(bookMark);
 })();
