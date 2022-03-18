@@ -560,7 +560,7 @@ const searchResults = async function() {
         if (!query) return;
         await _model.loadSearch(query);
         // console.log(model.state.searchResult.recipes);
-        _resultViewDefault.default.render(_model.renderRecipePerPage(3));
+        _resultViewDefault.default.render(_model.renderRecipePerPage());
         _paginationDefault.default.render(_model.state.searchResult);
     } catch (err) {
         console.error(err);
@@ -570,12 +570,18 @@ const pageBtnClicked = function(page) {
     _resultViewDefault.default.render(_model.renderRecipePerPage(page));
     _paginationDefault.default.render(_model.state.searchResult);
 };
+// rendering servings (updating)
+const updateRecipe = function(recipe) {
+    _model.updateRecipeState(recipe);
+    _recipeViewDefault.default.render(_model.state.recipe);
+};
 // prettier-ignore
 // Publisher Scriber Pattern
 (function() {
     _recipeViewDefault.default.addHandlerRender(getData);
     _searchViewDefault.default.addHandlearSearch(searchResults);
     _paginationDefault.default.addHandlerPage(pageBtnClicked);
+    _recipeViewDefault.default.addHandelerTinyButton(updateRecipe);
 })();
 
 },{"core-js/modules/web.immediate.js":"49tUX","regenerator-runtime":"dXNgZ","regenerator-runtime/runtime":"dXNgZ","./model":"Y4A21","./views/recipeView":"l60JC","./views/searchView":"9OQAM","./views/resultView":"f70O5","./views/pagination":"lOFRU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"49tUX":[function(require,module,exports) {
@@ -2230,6 +2236,8 @@ parcelHelpers.export(exports, "loadSearch", ()=>loadSearch
 );
 parcelHelpers.export(exports, "renderRecipePerPage", ()=>renderRecipePerPage
 );
+parcelHelpers.export(exports, "updateRecipeState", ()=>updateRecipeState
+);
 var _config = require("./config");
 var _helper = require("./helper");
 const state = {
@@ -2282,6 +2290,12 @@ const renderRecipePerPage = function(page = state.searchResult.page) {
     const start = (page - 1) * state.searchResult.currentPage;
     const end = page * state.searchResult.currentPage;
     return state.searchResult.recipes.slice(start, end);
+};
+const updateRecipeState = function(recipe) {
+    state.recipe.ingredients.forEach(function(ele) {
+        ele.quantity = +ele.quantity * +recipe / +state.recipe.servings;
+    });
+    state.recipe.servings = recipe;
 };
 
 },{"./config":"k5Hzs","./helper":"lVRAz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"k5Hzs":[function(require,module,exports) {
@@ -2368,6 +2382,17 @@ class RecipeView extends _viewDefault.default {
     _parent = document.querySelector('.recipe');
     // _recipe = {};
     _message = `Did not find results for your Data`;
+    // adding increase and decreaseing button
+    addHandelerTinyButton(func) {
+        this._parent.addEventListener('click', function(evt) {
+            const btn = evt.target.closest('.btn--tiny');
+            // console.log(btn);
+            if (!btn) return;
+            const serving = +btn.dataset.serving;
+            console.log(serving);
+            if (serving >= 1) func(serving);
+        });
+    }
     // prettier-ignore
     _generateMarkup(recipe) {
         return `
@@ -2394,12 +2419,12 @@ class RecipeView extends _viewDefault.default {
                 <span class="recipe__info-text">servings</span>
     
                 <div class="recipe__info-buttons">
-                  <button class="btn--tiny btn--increase-servings">
+                  <button data-serving = ${recipe.servings - 1} class="btn--tiny btn--increase-servings">
                     <svg>
                       <use href="${_iconsSvgDefault.default}#icon-minus-circle"></use>
                     </svg>
                   </button>
-                  <button class="btn--tiny btn--increase-servings">
+                  <button data-serving = ${recipe.servings + 1} class="btn--tiny btn--increase-servings">
                     <svg>
                       <use href="${_iconsSvgDefault.default}#icon-plus-circle"></use>
                     </svg>

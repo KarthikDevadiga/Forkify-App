@@ -37,7 +37,7 @@ const searchResults = async function () {
     if (!query) return;
     await model.loadSearch(query);
     // console.log(model.state.searchResult.recipes);
-    resultView.render(model.renderRecipePerPage(3));
+    resultView.render(model.renderRecipePerPage());
     pagination.render(model.state.searchResult);
   } catch (err) {
     console.error(err);
@@ -48,6 +48,12 @@ const pageBtnClicked = function (page) {
   resultView.render(model.renderRecipePerPage(page));
   pagination.render(model.state.searchResult);
 };
+
+// rendering servings (updating)
+const updateRecipe = function (recipe) {
+  model.updateRecipeState(recipe);
+  recipeView.render(model.state.recipe);
+};
 // prettier-ignore
 // Publisher Scriber Pattern
 
@@ -55,4 +61,5 @@ const pageBtnClicked = function (page) {
   recipeView.addHandlerRender(getData);
   searchView.addHandlearSearch(searchResults);
   pagination.addHandlerPage(pageBtnClicked);
+  recipeView.addHandelerTinyButton(updateRecipe);
 })();

@@ -54,3 +54,10 @@ export const renderRecipePerPage = function (page = state.searchResult.page) {
 
   return state.searchResult.recipes.slice(start, end);
 };
+
+export const updateRecipeState = function (recipe) {
+  state.recipe.ingredients.forEach(function (ele) {
+    ele.quantity = (+ele.quantity * +recipe) / +state.recipe.servings;
+  });
+  state.recipe.servings = recipe;
+};
