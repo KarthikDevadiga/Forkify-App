@@ -16,6 +16,7 @@ if (model.hot) {
 }
 const getData = async function () {
   try {
+    recipeView.renderSpinner();
     const hashId = window.location.hash.slice(1);
     if (!hashId) return;
     // from model.js
@@ -30,11 +31,12 @@ const getData = async function () {
 
 const searchResults = async function () {
   try {
+    resultView.renderSpinner();
     const query = searchView.getQuery();
     if (!query) return;
     await model.loadSearch(query);
     console.log(model.state.searchResult.recipes);
-    resultView.render(model.state.searchResult.recipes);
+    resultView.render(model.renderRecipePerPage());
   } catch (err) {
     console.error(err);
   }

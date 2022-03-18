@@ -1,8 +1,9 @@
-import { FETCH_URL } from './config';
+import { FETCH_URL, RECIPE_PER_PAGE } from './config';
 import { getJSON } from './helper';
 export const state = {
   recipe: {},
   searchResult: {
+    page: 1,
     query: '',
     recipes: [],
   },
@@ -43,4 +44,11 @@ export const loadSearch = async function (query) {
     console.error(`${err} at file model.js`);
     throw err;
   }
+};
+
+export const renderRecipePerPage = function (page = state.searchResult.page) {
+  const start = (page - 1) * RECIPE_PER_PAGE;
+  const end = page * RECIPE_PER_PAGE;
+
+  return state.searchResult.recipes.slice(start, end);
 };

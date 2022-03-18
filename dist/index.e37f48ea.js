@@ -537,6 +537,7 @@ var _resultViewDefault = parcelHelpers.interopDefault(_resultView);
 if (_model.hot) _model.hot.accept();
 const getData = async function() {
     try {
+        _recipeViewDefault.default.renderSpinner();
         const hashId = window.location.hash.slice(1);
         if (!hashId) return;
         // from model.js
@@ -550,11 +551,12 @@ const getData = async function() {
 };
 const searchResults = async function() {
     try {
+        _resultViewDefault.default.renderSpinner();
         const query = _searchViewDefault.default.getQuery();
         if (!query) return;
         await _model.loadSearch(query);
         console.log(_model.state.searchResult.recipes);
-        _resultViewDefault.default.render(_model.state.searchResult.recipes);
+        _resultViewDefault.default.render(_model.renderRecipePerPage());
     } catch (err) {
         console.error(err);
     }
@@ -605,12 +607,15 @@ parcelHelpers.export(exports, "loadRecipe", ()=>loadRecipe
 );
 parcelHelpers.export(exports, "loadSearch", ()=>loadSearch
 );
+parcelHelpers.export(exports, "renderRecipePerPage", ()=>renderRecipePerPage
+);
 var _config = require("./config");
 var _helper = require("./helper");
 const state = {
     recipe: {
     },
     searchResult: {
+        page: 1,
         query: '',
         recipes: []
     }
@@ -650,6 +655,11 @@ const loadSearch = async function(query) {
         throw err;
     }
 };
+const renderRecipePerPage = function(page = state.searchResult.page) {
+    const start = (page - 1) * _config.RECIPE_PER_PAGE;
+    const end = page * _config.RECIPE_PER_PAGE;
+    return state.searchResult.recipes.slice(start, end);
+};
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./config":"k5Hzs","./helper":"lVRAz"}],"k5Hzs":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -658,8 +668,11 @@ parcelHelpers.export(exports, "FETCH_URL", ()=>FETCH_URL
 );
 parcelHelpers.export(exports, "TIME_OUT", ()=>TIME_OUT
 );
+parcelHelpers.export(exports, "RECIPE_PER_PAGE", ()=>RECIPE_PER_PAGE
+);
 const FETCH_URL = 'https://forkify-api.herokuapp.com/api/v2/recipes/';
 const TIME_OUT = 10;
+const RECIPE_PER_PAGE = 10;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lVRAz":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -2487,7 +2500,7 @@ parcelHelpers.defineInteropFlag(exports);
 var _iconsSvg = require("url:../../img/icons.svg");
 var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 class View {
-    renderSpinner = function(container) {
+    renderSpinner = function() {
         const spinner = `
           <div class="spinner">
             <svg>
@@ -2495,12 +2508,11 @@ class View {
             </svg>
           </div>
         `;
-        container.insertAdjacentHTML('afterbegin', spinner);
+        this._parent.insertAdjacentHTML('afterbegin', spinner);
     };
     render(data) {
         if (!data || Array.isArray(data) && data.length === 0) return this.rendorError();
         this._clearParent(this._parent);
-        this.renderSpinner(this._parent);
         this._recipe = data;
         this._parent.insertAdjacentHTML('afterbegin', this._generateMarkup(data));
     }
