@@ -1,5 +1,5 @@
-import { FETCH_URL, RECIPE_PER_PAGE } from './config';
-import { getJSON } from './helper';
+import { FETCH_URL, KEY, RECIPE_PER_PAGE } from './config';
+import { getJSON, sendJSON } from './helper';
 export const state = {
   recipe: {},
   searchResult: {
@@ -10,21 +10,25 @@ export const state = {
   },
   bookMarks: [],
 };
+const getFactoredObject = function (data) {
+  let { recipe } = data.data;
+  return {
+    cookingTime: recipe.cooking_time,
+    id: recipe.id,
+    imageUrl: recipe.image_url,
+    ingredients: recipe.ingredients,
+    publisher: recipe.publisher,
+    servings: recipe.servings,
+    sourceUrl: recipe.source_url,
+    title: recipe.title,
+    ...(recipe.key && { key: recipe.key }),
+  };
+};
 
 export const loadRecipe = async function (hashId) {
   try {
-    data = await getJSON(FETCH_URL + hashId);
-    let { recipe } = data.data;
-    state.recipe = {
-      cookingTime: recipe.cooking_time,
-      id: recipe.id,
-      imageUrl: recipe.image_url,
-      ingredients: recipe.ingredients,
-      publisher: recipe.publisher,
-      servings: recipe.servings,
-      sourceUrl: recipe.source_url,
-      title: recipe.title,
-    };
+    data = await getJSON(`${FETCH_URL}${hashId}?key=${KEY}`);
+    state.recipe = getFactoredObject(data);
     if (state.bookMarks.some((recipeId) => recipeId.id == hashId))
       state.recipe.bookMark = true;
     else state.recipe.bookMark = false;
@@ -35,7 +39,7 @@ export const loadRecipe = async function (hashId) {
 
 export const loadSearch = async function (query) {
   try {
-    const data = await getJSON(`${FETCH_URL}?search=${query}`);
+    const data = await getJSON(`${FETCH_URL}?search=${query}&key=${KEY}`);
     let { recipes } = data.data;
     state.searchResult.recipes = recipes.map((ele) => {
       return {
@@ -43,9 +47,11 @@ export const loadSearch = async function (query) {
         title: ele.title,
         imageUrl: ele.image_url,
         id: ele.id,
+        ...(ele.key && { key: ele.key }),
       };
     });
     state.searchResult.page = 1;
+    this._data = state.searchResult.recipes;
   } catch (err) {
     console.error(`${err} at file model.js`);
     throw err;
@@ -76,8 +82,8 @@ const getLocalStorage = function () {
   return localStorage.getItem('bookMarks');
 };
 
-export const initiateBookMark = function () {
-  const currentRecipe = state.recipe;
+export const initiateBookMark = function (currentRecipe) {
+  // const currentRecipe = state.recipe;
   state.bookMarks.push(currentRecipe);
   state.recipe.bookMark = true;
   setLocalStorage(state.bookMarks);
@@ -101,3 +107,36 @@ const init = function () {
 };
 
 init();
+
+// reciving from  controller
+export const newRecipe = async function (recipe) {
+  try {
+    console.log(Object.entries(recipe));
+    const ingredients = Object.entries(recipe)
+      .filter(function (ele) {
+        return ele[0].startsWith('ingredient') && ele[1] !== '';
+      })
+      .map(function (ing) {
+        const ingArr = ing[1].replaceAll(' ', '').split(',');
+        if (ingArr.length !== 3) throw new Error('Problem in input data');
+        const [quantity, unity, description] = ing[1]
+          .replaceAll(' ', '')
+          .split(',');
+        return { quantity: quantity ? +quantity : null, unity, description };
+      });
+    const recipeData = {
+      title: recipe.title,
+      source_url: recipe.sourceUrl,
+      image_url: recipe.image,
+      publisher: recipe.publisher,
+      cooking_time: +recipe.cookingTime,
+      servings: +recipe.servings,
+      ingredients,
+    };
+    const data = await sendJSON(`${FETCH_URL}?key=${KEY}`, recipeData);
+    state.recipe = getFactoredObject(data);
+    initiateBookMark(state.recipe);
+  } catch (err) {
+    throw err;
+  }
+};

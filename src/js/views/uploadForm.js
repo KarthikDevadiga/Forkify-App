@@ -11,6 +11,8 @@ class UploadForm extends View {
 
   _closeBtn = document.querySelector('.btn--close-modal');
 
+  _message = 'Uploaded Sucessfully :)';
+
   constructor() {
     super();
     this._addHandlerShowWindow();

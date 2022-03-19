@@ -65,14 +65,28 @@ const bookMark = function () {
   if (model.state.recipe.bookMark) {
     model.removeBookMark();
   } else {
-    model.initiateBookMark();
+    model.initiateBookMark(model.state.recipe);
   }
   recipeView.render(model.state.recipe);
   bookMarks.render(model.state.bookMarks);
 };
 
-const submitFormData = function (data) {
-  console.log(data);
+const submitFormData = async function (data) {
+  try {
+    await model.newRecipe(data);
+    console.log(model.state.recipe);
+    recipeView.render(model.state.recipe);
+    uploadForm.rendorError();
+    bookMarks.render(model.state.recipe);
+    window.history.pushState(null, '', `#${model.state.recipe.id}`);
+
+    setTimeout(function () {
+      uploadForm.toggleWindow();
+      console.log('timer running');
+    }, 3000);
+  } catch (err) {
+    uploadForm.rendorError(err.message);
+  }
 };
 // prettier-ignore
 // Publisher Scriber Pattern

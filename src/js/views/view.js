@@ -29,9 +29,9 @@ export default class View {
     container.innerHTML = '';
   }
 
-  rendorError() {
+  rendorError(msg = this._message) {
     this._clearParent(this._parent);
 
-    this._parent.insertAdjacentText('afterbegin', this._message);
+    this._parent.insertAdjacentText('afterbegin', msg);
   }
 }

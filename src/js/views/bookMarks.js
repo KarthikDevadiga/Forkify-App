@@ -1,3 +1,5 @@
+import icons from 'url:../../img/icons.svg';
+
 import View from './view';
 class BookMarks extends View {
   _parent = document.querySelector('.bookmarks__list');
@@ -16,6 +18,11 @@ class BookMarks extends View {
             <h4 class="preview__title">${ele.title}.</h4>
             <p class="preview__publisher">${ele.publisher}</p>
           </div>
+          <div class="preview__user-generated ${ele.key ? '' : 'hidden'}">
+                <svg>
+                  <use href="${icons}#icon-user"></use>
+                </svg>
+              </div>
         </a>
       </li>
         `;

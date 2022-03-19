@@ -1,8 +1,10 @@
+import icons from 'url:../../img/icons.svg';
+
 import View from './view';
 class ResultView extends View {
   _parent = document.querySelector('.results');
   _message = `Did not find results for your Data`;
-
+  // prettier-ignore
   _generateMarkup(recipe) {
     return recipe
       .map((ele) => {
@@ -16,6 +18,11 @@ class ResultView extends View {
             <h4 class="preview__title">${ele.title}.</h4>
             <p class="preview__publisher">${ele.publisher}</p>
           </div>
+          <div class="preview__user-generated ${ele.key ? "" : "hidden"}">
+                <svg>
+                  <use href="${icons}#icon-user"></use>
+                </svg>
+              </div>
         </a>
       </li>
         `;
