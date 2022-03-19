@@ -13,6 +13,8 @@ import pagination from './views/pagination';
 import bookMarks from './views/bookMarks';
 
 ///////////////////////////////////////////////////
+bookMarks.render(model.state.bookMarks);
+
 // if (model.hot) {
 //   model.hot.accept();
 // }

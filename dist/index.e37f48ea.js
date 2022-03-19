@@ -538,6 +538,7 @@ var _paginationDefault = parcelHelpers.interopDefault(_pagination);
 var _bookMarks = require("./views/bookMarks");
 var _bookMarksDefault = parcelHelpers.interopDefault(_bookMarks);
 ///////////////////////////////////////////////////
+_bookMarksDefault.default.render(_model.state.bookMarks);
 // if (model.hot) {
 //   model.hot.accept();
 // }
@@ -2317,10 +2318,18 @@ const updateRecipeState = function(recipe) {
     });
     state.recipe.servings = recipe;
 };
+// setting bookMarks to localStorage
+const setLocalStorage = function(bookMarksArr) {
+    localStorage.setItem('bookMarks', JSON.stringify(bookMarksArr));
+};
+const getLocalStorage = function() {
+    return localStorage.getItem('bookMarks');
+};
 const initiateBookMark = function() {
     const currentRecipe = state.recipe;
     state.bookMarks.push(currentRecipe);
     state.recipe.bookMark = true;
+    setLocalStorage(state.bookMarks);
 // console.log(state.recipe);
 };
 const removeBookMark = function() {
@@ -2328,7 +2337,15 @@ const removeBookMark = function() {
     );
     state.bookMarks.splice(index, 1);
     state.recipe.bookMark = false;
+    setLocalStorage(state.bookMarks);
 };
+const init = function() {
+    const storage = getLocalStorage();
+    if (!storage) return;
+    state.bookMarks = JSON.parse(storage);
+    console.log(JSON.parse(storage));
+};
+init();
 
 },{"./config":"k5Hzs","./helper":"lVRAz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"k5Hzs":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
