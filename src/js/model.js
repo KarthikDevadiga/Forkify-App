@@ -97,7 +97,7 @@ const init = function () {
   const storage = getLocalStorage();
   if (!storage) return;
   state.bookMarks = JSON.parse(storage);
-  console.log(JSON.parse(storage));
+  // console.log(JSON.parse(storage));
 };
 
 init();

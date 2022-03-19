@@ -11,6 +11,7 @@ import searchView from './views/searchView';
 import resultView from './views/resultView';
 import pagination from './views/pagination';
 import bookMarks from './views/bookMarks';
+import uploadForm from './views/uploadForm';
 
 ///////////////////////////////////////////////////
 bookMarks.render(model.state.bookMarks);
@@ -69,6 +70,10 @@ const bookMark = function () {
   recipeView.render(model.state.recipe);
   bookMarks.render(model.state.bookMarks);
 };
+
+const submitFormData = function (data) {
+  console.log(data);
+};
 // prettier-ignore
 // Publisher Scriber Pattern
 
@@ -78,4 +83,5 @@ const bookMark = function () {
   pagination.addHandlerPage(pageBtnClicked);
   recipeView.addHandelerTinyButton(updateRecipe);
   recipeView._addHandlerBookMark(bookMark);
+  uploadForm.addHandlerUpload(submitFormData);
 })();

@@ -537,6 +537,8 @@ var _pagination = require("./views/pagination");
 var _paginationDefault = parcelHelpers.interopDefault(_pagination);
 var _bookMarks = require("./views/bookMarks");
 var _bookMarksDefault = parcelHelpers.interopDefault(_bookMarks);
+var _uploadForm = require("./views/uploadForm");
+var _uploadFormDefault = parcelHelpers.interopDefault(_uploadForm);
 ///////////////////////////////////////////////////
 _bookMarksDefault.default.render(_model.state.bookMarks);
 // if (model.hot) {
@@ -586,6 +588,9 @@ const bookMark = function() {
     _recipeViewDefault.default.render(_model.state.recipe);
     _bookMarksDefault.default.render(_model.state.bookMarks);
 };
+const submitFormData = function(data) {
+    console.log(data);
+};
 // prettier-ignore
 // Publisher Scriber Pattern
 (function() {
@@ -594,9 +599,10 @@ const bookMark = function() {
     _paginationDefault.default.addHandlerPage(pageBtnClicked);
     _recipeViewDefault.default.addHandelerTinyButton(updateRecipe);
     _recipeViewDefault.default._addHandlerBookMark(bookMark);
+    _uploadFormDefault.default.addHandlerUpload(submitFormData);
 })();
 
-},{"core-js/modules/web.immediate.js":"49tUX","regenerator-runtime":"dXNgZ","regenerator-runtime/runtime":"dXNgZ","./model":"Y4A21","./views/recipeView":"l60JC","./views/searchView":"9OQAM","./views/resultView":"f70O5","./views/pagination":"lOFRU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./views/bookMarks":"jjsQn"}],"49tUX":[function(require,module,exports) {
+},{"core-js/modules/web.immediate.js":"49tUX","regenerator-runtime":"dXNgZ","regenerator-runtime/runtime":"dXNgZ","./model":"Y4A21","./views/recipeView":"l60JC","./views/searchView":"9OQAM","./views/resultView":"f70O5","./views/pagination":"lOFRU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./views/bookMarks":"jjsQn","./views/uploadForm":"iysfK"}],"49tUX":[function(require,module,exports) {
 var $ = require('../internals/export');
 var global = require('../internals/global');
 var task = require('../internals/task');
@@ -2343,7 +2349,7 @@ const init = function() {
     const storage = getLocalStorage();
     if (!storage) return;
     state.bookMarks = JSON.parse(storage);
-    console.log(JSON.parse(storage));
+// console.log(JSON.parse(storage));
 };
 init();
 
@@ -2756,6 +2762,51 @@ class BookMarks extends _viewDefault.default {
     }
 }
 exports.default = new BookMarks();
+
+},{"./view":"bWlJ9","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iysfK":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _view = require("./view");
+var _viewDefault = parcelHelpers.interopDefault(_view);
+class UploadForm extends _viewDefault.default {
+    // form window
+    _formWindow = document.querySelector('.add-recipe-window');
+    //form
+    _parent = document.querySelector('.upload');
+    // blur overlay
+    _overlay = document.querySelector('.overlay');
+    _openBtn = document.querySelector('.nav__btn--add-recipe');
+    _closeBtn = document.querySelector('.btn--close-modal');
+    constructor(){
+        super();
+        this._addHandlerShowWindow();
+        this._addHandlerHideWindow();
+    }
+    toggleWindow() {
+        this._overlay.classList.toggle('hidden');
+        this._formWindow.classList.toggle('hidden');
+    }
+    _addHandlerShowWindow() {
+        this._closeBtn.addEventListener('click', this.toggleWindow.bind(this));
+    }
+    _addHandlerHideWindow() {
+        this._openBtn.addEventListener('click', this.toggleWindow.bind(this));
+        this._overlay.addEventListener('click', this.toggleWindow.bind(this));
+    }
+    addHandlerUpload(func) {
+        this._parent.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // consuming form data all at once
+            const dataArr = [
+                ...new FormData(this)
+            ];
+            // converting entries into onject
+            const finalData = Object.fromEntries(dataArr);
+            func(finalData);
+        });
+    }
+}
+exports.default = new UploadForm();
 
 },{"./view":"bWlJ9","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["ddCAb","aenu9"], "aenu9", "parcelRequire3a11")
 
