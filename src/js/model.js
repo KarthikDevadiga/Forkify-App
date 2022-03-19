@@ -51,7 +51,6 @@ export const loadSearch = async function (query) {
       };
     });
     state.searchResult.page = 1;
-    this._data = state.searchResult.recipes;
   } catch (err) {
     console.error(`${err} at file model.js`);
     throw err;
