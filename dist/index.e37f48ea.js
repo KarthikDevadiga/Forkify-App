@@ -535,6 +535,8 @@ var _resultView = require("./views/resultView");
 var _resultViewDefault = parcelHelpers.interopDefault(_resultView);
 var _pagination = require("./views/pagination");
 var _paginationDefault = parcelHelpers.interopDefault(_pagination);
+var _bookMarks = require("./views/bookMarks");
+var _bookMarksDefault = parcelHelpers.interopDefault(_bookMarks);
 ///////////////////////////////////////////////////
 // if (model.hot) {
 //   model.hot.accept();
@@ -581,6 +583,7 @@ const bookMark = function() {
     if (_model.state.recipe.bookMark) _model.removeBookMark();
     else _model.initiateBookMark();
     _recipeViewDefault.default.render(_model.state.recipe);
+    _bookMarksDefault.default.render(_model.state.bookMarks);
 };
 // prettier-ignore
 // Publisher Scriber Pattern
@@ -592,7 +595,7 @@ const bookMark = function() {
     _recipeViewDefault.default._addHandlerBookMark(bookMark);
 })();
 
-},{"core-js/modules/web.immediate.js":"49tUX","regenerator-runtime":"dXNgZ","regenerator-runtime/runtime":"dXNgZ","./model":"Y4A21","./views/recipeView":"l60JC","./views/searchView":"9OQAM","./views/resultView":"f70O5","./views/pagination":"lOFRU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"49tUX":[function(require,module,exports) {
+},{"core-js/modules/web.immediate.js":"49tUX","regenerator-runtime":"dXNgZ","regenerator-runtime/runtime":"dXNgZ","./model":"Y4A21","./views/recipeView":"l60JC","./views/searchView":"9OQAM","./views/resultView":"f70O5","./views/pagination":"lOFRU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./views/bookMarks":"jjsQn"}],"49tUX":[function(require,module,exports) {
 var $ = require('../internals/export');
 var global = require('../internals/global');
 var task = require('../internals/task');
@@ -2277,7 +2280,7 @@ const loadRecipe = async function(hashId) {
             sourceUrl: recipe.source_url,
             title: recipe.title
         };
-        if (state.bookMarks.some((recipeId)=>recipeId == hashId
+        if (state.bookMarks.some((recipeId)=>recipeId.id == hashId
         )) state.recipe.bookMark = true;
         else state.recipe.bookMark = false;
     } catch (err) {
@@ -2316,12 +2319,12 @@ const updateRecipeState = function(recipe) {
 };
 const initiateBookMark = function() {
     const currentRecipe = state.recipe;
-    state.bookMarks.push(currentRecipe.id);
+    state.bookMarks.push(currentRecipe);
     state.recipe.bookMark = true;
-    console.log(state.recipe);
+// console.log(state.recipe);
 };
 const removeBookMark = function() {
-    const index = state.bookMarks.findIndex((recipeId)=>recipeId === state.recipe.id
+    const index = state.bookMarks.findIndex((recipe)=>recipe.id === state.recipe.id
     );
     state.bookMarks.splice(index, 1);
     state.recipe.bookMark = false;
@@ -2709,6 +2712,34 @@ class Pagination extends _viewDefault.default {
 }
 exports.default = new Pagination(); // render -> _generateMarkup(data)
 
-},{"../config":"k5Hzs","url:../../img/icons.svg":"loVOp","./view":"bWlJ9","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["ddCAb","aenu9"], "aenu9", "parcelRequire3a11")
+},{"../config":"k5Hzs","url:../../img/icons.svg":"loVOp","./view":"bWlJ9","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jjsQn":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _view = require("./view");
+var _viewDefault = parcelHelpers.interopDefault(_view);
+class BookMarks extends _viewDefault.default {
+    _parent = document.querySelector('.bookmarks__list');
+    _message = `Did not find results for your Data`;
+    _generateMarkup(recipe) {
+        return recipe.map((ele)=>{
+            return `
+        <li class="preview">
+        <a class="preview__link" href="#${ele.id}">
+          <figure class="preview__fig">
+            <img src="${ele.imageUrl}" alt="${ele.title}" />
+          </figure>
+          <div class="preview__data">
+            <h4 class="preview__title">${ele.title}.</h4>
+            <p class="preview__publisher">${ele.publisher}</p>
+          </div>
+        </a>
+      </li>
+        `;
+        }).join('');
+    }
+}
+exports.default = new BookMarks();
+
+},{"./view":"bWlJ9","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["ddCAb","aenu9"], "aenu9", "parcelRequire3a11")
 
 //# sourceMappingURL=index.e37f48ea.js.map

@@ -25,7 +25,7 @@ export const loadRecipe = async function (hashId) {
       sourceUrl: recipe.source_url,
       title: recipe.title,
     };
-    if (state.bookMarks.some((recipeId) => recipeId == hashId))
+    if (state.bookMarks.some((recipeId) => recipeId.id == hashId))
       state.recipe.bookMark = true;
     else state.recipe.bookMark = false;
   } catch (err) {
@@ -69,14 +69,14 @@ export const updateRecipeState = function (recipe) {
 
 export const initiateBookMark = function () {
   const currentRecipe = state.recipe;
-  state.bookMarks.push(currentRecipe.id);
+  state.bookMarks.push(currentRecipe);
   state.recipe.bookMark = true;
-  console.log(state.recipe);
+  // console.log(state.recipe);
 };
 
 export const removeBookMark = function () {
   const index = state.bookMarks.findIndex(
-    (recipeId) => recipeId === state.recipe.id
+    (recipe) => recipe.id === state.recipe.id
   );
   state.bookMarks.splice(index, 1);
   state.recipe.bookMark = false;

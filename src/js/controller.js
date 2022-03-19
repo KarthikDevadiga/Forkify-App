@@ -10,6 +10,7 @@ import searchView from './views/searchView';
 
 import resultView from './views/resultView';
 import pagination from './views/pagination';
+import bookMarks from './views/bookMarks';
 
 ///////////////////////////////////////////////////
 // if (model.hot) {
@@ -64,6 +65,7 @@ const bookMark = function () {
     model.initiateBookMark();
   }
   recipeView.render(model.state.recipe);
+  bookMarks.render(model.state.bookMarks);
 };
 // prettier-ignore
 // Publisher Scriber Pattern
