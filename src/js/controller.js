@@ -30,7 +30,8 @@ const getData = async function () {
     // displasys recipe for user from recipe object
     console.log('renser recipe');
     console.log(model.state.recipe);
-    recipeView.render(model.state.recipe);
+    const recipe = model.getRecipe();
+    recipeView.render(recipe);
   } catch (err) {
     console.error(`error MANUAL ${err}`);
   }

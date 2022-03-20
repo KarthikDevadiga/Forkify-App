@@ -140,3 +140,7 @@ export const newRecipe = async function (recipe) {
     throw err;
   }
 };
+
+export const getRecipe = function () {
+  return state.recipe;
+};
