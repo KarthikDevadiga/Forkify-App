@@ -2635,7 +2635,7 @@
 113/home/karthik/Documents/forkify/Forkify-App/node_modules/@parcel/transformer-babel/node_modules/.bin/browserslist1647512149798213335 0
 90/home/karthik/Documents/forkify/Forkify-App/node_modules/caniuse-lite/data/features/let.js1647503985744999000 0
 87/home/karthik/Documents/forkify/Forkify-App/node_modules/@parcel/core/src/buildCache.js1647503974392999000 0
-66/home/karthik/Documents/forkify/Forkify-App/dist/logo.8a7af738.png1647761103373400046 0
+66/home/karthik/Documents/forkify/Forkify-App/dist/logo.8a7af738.png1647762468153636896 0
 91/home/karthik/Documents/forkify/Forkify-App/node_modules/core-js/features/iterator/index.js1647604993108773495 0
 87/home/karthik/Documents/forkify/Forkify-App/node_modules/@parcel/core/lib/AssetGraph.js1647503974392999000 0
 86/home/karthik/Documents/forkify/Forkify-App/node_modules/weak-lru-cache/LRFUExpirer.js1647503989430000000 0
@@ -2758,7 +2758,7 @@
 89/home/karthik/Documents/forkify/Forkify-App/node_modules/cosmiconfig/dist/getDirectory.js1641630367822000000 0
 91/home/karthik/Documents/forkify/Forkify-App/node_modules/entities/lib/decode_codepoint.d.ts1647503994635999000 0
 97/home/karthik/Documents/forkify/Forkify-App/node_modules/postcss-selector-parser/dist/tokenize.js1643463042049999000 0
-43/home/karthik/Documents/forkify/Forkify-App1647761102905390824 1
+43/home/karthik/Documents/forkify/Forkify-App1647762467609636573 1
 88/home/karthik/Documents/forkify/Forkify-App/node_modules/@parcel/codeframe/test/fixtures1647504025218812890 1
 98/home/karthik/Documents/forkify/Forkify-App/node_modules/postcss-normalize-whitespace/package.json1647503994246000000 0
 87/home/karthik/Documents/forkify/Forkify-App/node_modules/@parcel/core/src/loadDotEnv.js1647503974392999000 0
@@ -3165,7 +3165,7 @@
 105/home/karthik/Documents/forkify/Forkify-App/node_modules/lmdb/dependencies/lmdb/libraries/liblmdb/mtest.c1647503985648000000 0
 90/home/karthik/Documents/forkify/Forkify-App/node_modules/core-js/modules/es.object.seal.js1647604994080774955 0
 103/home/karthik/Documents/forkify/Forkify-App/node_modules/@parcel/core/src/requests/ValidationRequest.js1647503974392999000 0
-66/home/karthik/Documents/forkify/Forkify-App/dist/index.17042428.js1647761103697406426 0
+66/home/karthik/Documents/forkify/Forkify-App/dist/index.17042428.js1647762468441637070 0
 134/home/karthik/Documents/forkify/Forkify-App/node_modules/@parcel/node-resolver-core/test/fixture/node_modules/package-module/module.js1647503987171999000 0
 67/home/karthik/Documents/forkify/Forkify-App/node_modules/parcel/lib1647511088126648476 1
 94/home/karthik/Documents/forkify/Forkify-App/node_modules/@swc/helpers/src/_get_prototype_of.js1647503985832000000 0
@@ -3233,7 +3233,7 @@
 83/home/karthik/Documents/forkify/Forkify-App/node_modules/core-js/es/string/index.js1647604992628772774 0
 81/home/karthik/Documents/forkify/Forkify-App/node_modules/postcss-minify-selectors1647511085818621826 1
 100/home/karthik/Documents/forkify/Forkify-App/node_modules/@parcel/workers/src/threads/ThreadsChild.js1647503983052000000 0
-67/home/karthik/Documents/forkify/Forkify-App/dist/icons.9801e6f1.svg1647761103697406426 0
+67/home/karthik/Documents/forkify/Forkify-App/dist/icons.9801e6f1.svg1647762468437637068 0
 100/home/karthik/Documents/forkify/Forkify-App/node_modules/core-js/features/array/virtual/find-last.js1647604992784773008 0
 106/home/karthik/Documents/forkify/Forkify-App/node_modules/caniuse-lite/data/features/css-scroll-behavior.js1647503985744999000 0
 91/home/karthik/Documents/forkify/Forkify-App/node_modules/core-js/features/regexp/dot-all.js1647604993600774234 0
@@ -3480,7 +3480,7 @@
 79/home/karthik/Documents/forkify/Forkify-App/node_modules/cssnano-preset-default1647511083866599287 1
 99/home/karthik/Documents/forkify/Forkify-App/node_modules/core-js/modules/es.object.define-setter.js1647604994080774955 0
 95/home/karthik/Documents/forkify/Forkify-App/node_modules/core-js/features/date/to-iso-string.js1647604992912773201 0
-56/home/karthik/Documents/forkify/Forkify-App/package.json1647761097609285093 0
+56/home/karthik/Documents/forkify/Forkify-App/package.json1647762438369624860 0
 104/home/karthik/Documents/forkify/Forkify-App/node_modules/css-tree/lib/tokenizer/char-code-definitions.js1641323968954999000 0
 105/home/karthik/Documents/forkify/Forkify-App/node_modules/@parcel/transformer-css/node_modules/.bin/semver1647512149810213356 0
 95/home/karthik/Documents/forkify/Forkify-App/node_modules/cosmiconfig/dist/ExplorerSync.d.ts.map1641630367822000000 0
@@ -3548,7 +3548,7 @@
 111/home/karthik/Documents/forkify/Forkify-App/node_modules/@parcel/package-manager/src/validateModuleSpecifier.js1647503974956000000 0
 88/home/karthik/Documents/forkify/Forkify-App/node_modules/postcss-normalize-url/README.md1647503994239000000 0
 99/home/karthik/Documents/forkify/Forkify-App/node_modules/@parcel/markdown-ansi/src/markdown-ansi.js1647503984358000000 0
-71/home/karthik/Documents/forkify/Forkify-App/dist/index.b3cf19c6.css.map1647761103697406426 0
+71/home/karthik/Documents/forkify/Forkify-App/dist/index.b3cf19c6.css.map1647762468441637070 0
 100/home/karthik/Documents/forkify/Forkify-App/node_modules/@parcel/reporter-cli/lib/CLIReporter.js.map1647503974849999000 0
 91/home/karthik/Documents/forkify/Forkify-App/node_modules/@parcel/packager-html/package.json1647503978023999000 0
 83/home/karthik/Documents/forkify/Forkify-App/node_modules/entities/lib/maps/xml.json1647503994635999000 0
@@ -3640,7 +3640,7 @@
 106/home/karthik/Documents/forkify/Forkify-App/node_modules/msgpackr-extract/node_modules/.bin/node-gyp-build1647512149846213417 0
 85/home/karthik/Documents/forkify/Forkify-App/node_modules/core-js/actual/string/raw.js1647604992296772275 0
 86/home/karthik/Documents/forkify/Forkify-App/node_modules/@parcel/workers/src/Handle.js1647503983052000000 0
-70/home/karthik/Documents/forkify/Forkify-App/dist/index.17042428.js.map1647761103701406504 0
+70/home/karthik/Documents/forkify/Forkify-App/dist/index.17042428.js.map1647762468441637070 0
 101/home/karthik/Documents/forkify/Forkify-App/node_modules/postcss-ordered-values/src/rules/flexFlow.js1647503994243999000 0
 122/home/karthik/Documents/forkify/Forkify-App/node_modules/@parcel/package-manager/test/fixtures/packages/peers-2.0/index.js1647503974956000000 0
 97/home/karthik/Documents/forkify/Forkify-App/node_modules/css-select/lib/pseudo-selectors/index.js1641323964811000000 0
@@ -3692,7 +3692,7 @@
 76/home/karthik/Documents/forkify/Forkify-App/node_modules/commander/Readme.md1647503974411999000 0
 71/home/karthik/Documents/forkify/Forkify-App/node_modules/weak-lru-cache1647504022050134935 1
 97/home/karthik/Documents/forkify/Forkify-App/node_modules/@parcel/utils/src/generateCertificate.js1647503974553999000 0
-48/home/karthik/Documents/forkify/Forkify-App/dist1647761103701406504 1
+48/home/karthik/Documents/forkify/Forkify-App/dist1647762468441637070 1
 110/home/karthik/Documents/forkify/Forkify-App/node_modules/core-js/actual/object/get-own-property-descriptors.js1647604992284772257 0
 83/home/karthik/Documents/forkify/Forkify-App/node_modules/dotenv-expand/package.json1641323940194000000 0
 84/home/karthik/Documents/forkify/Forkify-App/node_modules/lines-and-columns/README.md1641313249082999000 0
@@ -3722,7 +3722,7 @@
 74/home/karthik/Documents/forkify/Forkify-App/node_modules/type-fest/license1647503988522000000 0
 70/home/karthik/Documents/forkify/Forkify-App/src/js/views/resultView.js1647719247529636751 0
 74/home/karthik/Documents/forkify/Forkify-App/node_modules/commander/LICENSE1647503974411999000 0
-59/home/karthik/Documents/forkify/Forkify-App/dist/index.html1647761103697406426 0
+59/home/karthik/Documents/forkify/Forkify-App/dist/index.html1647762468437637068 0
 99/home/karthik/Documents/forkify/Forkify-App/node_modules/core-js/modules/esnext.weak-set.add-all.js1647604995260776723 0
 63/home/karthik/Documents/forkify/Forkify-App/node_modules/base-x1647511081730574624 1
 78/home/karthik/Documents/forkify/Forkify-App/node_modules/escalade/package.json1641313218803999000 0
@@ -3791,7 +3791,7 @@
 86/home/karthik/Documents/forkify/Forkify-App/node_modules/@babel/highlight/lib/index.js1643463026693000000 0
 76/home/karthik/Documents/forkify/Forkify-App/node_modules/readdirp/index.d.ts1641323887298000000 0
 93/home/karthik/Documents/forkify/Forkify-App/node_modules/@swc/helpers/lib/_async_generator.js1647503985832000000 0
-67/home/karthik/Documents/forkify/Forkify-App/dist/index.b3cf19c6.css1647761103697406426 0
+67/home/karthik/Documents/forkify/Forkify-App/dist/index.b3cf19c6.css1647762468437637068 0
 88/home/karthik/Documents/forkify/Forkify-App/node_modules/core-js/stable/array/reverse.js1647604995384776909 0
 91/home/karthik/Documents/forkify/Forkify-App/node_modules/source-map-js/lib/binary-search.js1643463217874000000 0
 94/home/karthik/Documents/forkify/Forkify-App/node_modules/postcss-minify-selectors/src/index.js1647503994122999000 0
@@ -6139,7 +6139,7 @@
 88/home/karthik/Documents/forkify/Forkify-App/node_modules/core-js/stable/string/repeat.js1647604995404776939 0
 78/home/karthik/Documents/forkify/Forkify-App/node_modules/core-js/stable/regexp1647604995396776927 1
 93/home/karthik/Documents/forkify/Forkify-App/node_modules/core-js/stable/regexp/constructor.js1647604995396776927 0
-69/home/karthik/Documents/forkify/Forkify-App/dist/favicon.76dd299c.png1647761102913390982 0
+69/home/karthik/Documents/forkify/Forkify-App/dist/favicon.76dd299c.png1647762467617636578 0
 101/home/karthik/Documents/forkify/Forkify-App/node_modules/core-js/actual/string/virtual/starts-with.js1647604992304772287 0
 86/home/karthik/Documents/forkify/Forkify-App/node_modules/core-js/stable/regexp/test.js1647604995396776927 0
 89/home/karthik/Documents/forkify/Forkify-App/node_modules/core-js/stable/regexp/replace.js1647604995396776927 0
