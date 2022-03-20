@@ -3,10 +3,10 @@
   "version": "0.1",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html --dist-dir ./dist"
   },
   "description": "Allows user to upload, search, view various recipe ",
-  "main": "index.js",
+  "default": "index.js",
   "repository": "git@github.com:KarthikDevadiga/Forkify-App.git",
   "author": "Karthik K Devadiga",
   "license": "MIT",

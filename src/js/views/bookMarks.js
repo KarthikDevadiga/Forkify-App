@@ -4,7 +4,11 @@ import View from './view';
 class BookMarks extends View {
   _parent = document.querySelector('.bookmarks__list');
   _message = `Did not find results for your Data`;
-
+  /**
+   *
+   * @param {*} recipe
+   * @returns
+   */
   _generateMarkup(recipe) {
     return recipe
       .map((ele) => {
