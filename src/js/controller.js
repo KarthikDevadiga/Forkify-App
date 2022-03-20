@@ -28,6 +28,8 @@ const getData = async function () {
     await model.loadRecipe(hashId);
     // render method
     // displasys recipe for user from recipe object
+    console.log('renser recipe');
+    console.log(model.state.recipe);
     recipeView.render(model.state.recipe);
   } catch (err) {
     console.error(`error MANUAL ${err}`);
