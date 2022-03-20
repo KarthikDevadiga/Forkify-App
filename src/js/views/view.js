@@ -14,6 +14,7 @@ export default class View {
   };
 
   render(data) {
+    console.log(data);
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.rendorError();
     this._clearParent(this._parent);
