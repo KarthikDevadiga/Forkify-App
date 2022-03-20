@@ -30,6 +30,10 @@ export const loadRecipe = async function (hashId) {
     data = await getJSON(`${FETCH_URL}${hashId}?key=${KEY}`);
     console.log('data', data);
     state.recipe = getFactoredObject(data);
+    console.log('load recipe');
+    console.log(state.recipe);
+    console.log('load recipe');
+
     if (state.bookMarks.some((recipeId) => recipeId.id == hashId))
       state.recipe.bookMark = true;
     else state.recipe.bookMark = false;
